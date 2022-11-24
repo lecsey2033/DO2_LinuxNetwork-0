@@ -57,38 +57,38 @@
 ## Part 4. Сетевой экран
 Создать файл /etc/firewall.sh, имитирующий фаерволл, на ws1 и ws2
 использованные команды:
-* `chmod +x /etc/firewall.sh && /etc/firewall.sh`
+* `chmod +x /etc/firewall.sh && /etc/firewall.sh` <br>
 ![firewall.sh](./images/11_img.png)
-* проверка на соответствие заданию: соответствует
+* проверка на соответствие заданию: соответствует <br>
 ![firewall.sh](./images/12_img.png)
 ## Part 5. Статическая маршрутизация сети
 ### 5.1. Настройка адресов машин
 * Настроить конфигурации машин в etc/netplan/00-installer-config.yaml согласно сети на рисунке.
-* роутер r1
+* роутер r1 <br>
 ![r1](./images/13_img.png)
-* роутер r2
+* роутер r2 <br>
 ![r2](./images/14_img.png)
-* машина ws11
+* машина ws11 <br>
 ![ws11](./images/15_img.png)
-* машина ws21
+* машина ws21 <br>
 ![ws21](./images/16_img.png)
-* машина ws22
+* машина ws22 <br>
 ![ws22](./images/17_img.png)
 * Перезапустить сервис сети. `sudo netplan apply`
 * Если ошибок нет, то командой `ip -4 a` проверить, что адрес машины задан верно.
-* роутер r1
+* роутер r1 <br>
 ![r1](./images/18_img.png)
-* роутер r2
+* роутер r2 <br>
 ![r2](./images/19_img.png)
-* машина ws11
+* машина ws11 <br>
 ![ws11](./images/20_img.png)
-* машина ws21
+* машина ws21 <br>
 ![ws21](./images/21_img.png)
-* машина ws22
+* машина ws22 <br>
 ![ws22](./images/22_img.png)
-* Скрин пинга `ws22` с `ws21`.
+* Скрин пинга `ws22` с `ws21`. <br>
 ![ping ws22 ws21](./images/23_img.png)
-* Скрин пинга `r1` с `ws11`.
+* Скрин пинга `r1` с `ws11`. <br>
 ![ping r1 ws11](./images/24_img.png)
 ### 5.2. Включение переадресации IP-адресов.
 * Для включения переадресации IP, выполните команду на роутерах: `sysctl -w net.ipv4.ip_forward=1` При таком подходе переадресация не будет работать после перезагрузки системы. Cкрин с вызовом и выводом использованной команды.
@@ -114,9 +114,9 @@ default via 10.10.0.1 dev eth0
 ![yaml r1](./images/30_img.png)
 * роутер r2 <br>
 ![yaml r2](./images/31_img.png)
-* Вызовем команду ip r:
+* Вызовем команду ip r: <br>
 ![ip r](./images/32_img.png)
-* Вызов команд ip r list 10.10.0.0/18 и ip r list 0.0.0.0/0 на ws11:
+* Вызов команд ip r list 10.10.0.0/18 и ip r list 0.0.0.0/0 на ws11: <br>
 ![ip r](./images/33_img.png)
 * Для адреса 10.10.0.0/18 был выбран маршрут, отличный от 0.0.0.0/0, поскольку он является адресом сети и доступен без шлюза.
 ### 5.5. Построение списка маршрутизаторов
@@ -135,7 +135,7 @@ default via 10.10.0.1 dev eth0
 ![DHCP](./images/37_img.png)
 * Перезагрузить службу DHCP командой `systemctl restart isc-dhcp-server`. Машину ws21 перезагрузить при помощи reboot и через `ip a` показать, что она получила адрес. Также пропинговать ws22 с ws21.
 ![PING](./images/38_img.png)
-* Указать MAC адрес у ws11, для этого в etc/netplan/00-installer-config.yaml надо добавить строки: macaddress: 10:10:10:10:10:BA, dhcp4: true
+* Указать MAC адрес у ws11, для этого в etc/netplan/00-installer-config.yaml надо добавить строки: macaddress: 10:10:10:10:10:BA, dhcp4: true <br>
 ![ws11_dhcp](./images/39_img.png)
 * Содержание файла /etc/dhcp/dhcpd.conf для r1 с конфигурацией службы DHCP
 ![DHCP](./images/40_img.png)
@@ -157,7 +157,7 @@ default via 10.10.0.1 dev eth0
 ![apache2](./images/47_img.png)
 * Разрешить маршрутизацию всех пакетов протокола ICMP
 ![ICMP](./images/48_img.png)
-* Проверка соединения между ws22 и r1 командой ping
+* Проверка соединения между ws22 и r1 командой ping  <br>
 ![ICMP](./images/49_img.png)
 * Добавляем в iptables ещё несколько правил
 * Включить SNAT, а именно маскирование всех локальных ip из локальной сети, находящейся за r2 
